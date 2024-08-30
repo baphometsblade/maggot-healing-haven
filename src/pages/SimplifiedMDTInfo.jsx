@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image } from '@/components/ui/image';
+import { Image } from '../../components/ui/image';
 
 const SimplifiedMDTInfo = () => {
   return (
@@ -18,11 +18,9 @@ const SimplifiedMDTInfo = () => {
           </div>
           <div className="md:w-1/2">
             <Image 
-              src="/images/maggot-therapy-illustration.jpg" 
-              alt="Illustration of maggot therapy"
-              width={400}
-              height={300}
-              className="rounded-lg shadow-md"
+              src="/placeholder.svg" 
+              alt="Illustration of maggot therapy process"
+              className="rounded-lg shadow-md mx-auto object-cover"
             />
           </div>
         </div>
@@ -41,11 +39,9 @@ const SimplifiedMDTInfo = () => {
           </div>
           <div className="md:w-1/2">
             <Image 
-              src="/images/maggot-therapy-process.png" 
-              alt="Infographic showing the maggot therapy process"
-              width={400}
-              height={400}
-              className="rounded-lg shadow-md"
+              src="/placeholder.svg" 
+              alt="Infographic of maggot therapy stages"
+              className="rounded-lg shadow-md mx-auto object-cover"
             />
           </div>
         </div>
@@ -62,11 +58,9 @@ const SimplifiedMDTInfo = () => {
           </div>
           <div className="md:w-1/2">
             <Image 
-              src="/images/maggot-therapy-safety.jpg" 
-              alt="Image showing the safety of maggot therapy"
-              width={400}
-              height={300}
-              className="rounded-lg shadow-md"
+              src="/placeholder.svg" 
+              alt="Medical professional demonstrating maggot therapy safety"
+              className="rounded-lg shadow-md mx-auto object-cover"
             />
           </div>
         </div>
@@ -87,11 +81,9 @@ const SimplifiedMDTInfo = () => {
           </div>
           <div className="md:w-1/2">
             <Image 
-              src="/images/rbwh-exterior.jpg" 
-              alt="Exterior of Royal Brisbane and Women's Hospital"
-              width={400}
-              height={300}
-              className="rounded-lg shadow-md"
+              src="/placeholder.svg" 
+              alt="Exterior view of Royal Brisbane and Women's Hospital"
+              className="rounded-lg shadow-md mx-auto object-cover"
             />
           </div>
         </div>
@@ -108,11 +100,9 @@ const SimplifiedMDTInfo = () => {
           </div>
           <div className="md:w-1/2">
             <Image 
-              src="/images/doctor-patient-consultation.jpg" 
-              alt="Doctor consulting with a patient"
-              width={400}
-              height={300}
-              className="rounded-lg shadow-md"
+              src="/placeholder.svg" 
+              alt="Doctor consulting with a patient about maggot therapy"
+              className="rounded-lg shadow-md mx-auto object-cover"
             />
           </div>
         </div>
