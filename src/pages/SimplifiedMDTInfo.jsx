@@ -4,13 +4,19 @@ import { cn } from "@/lib/utils";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
-import { BugIcon, CheckCircleIcon, HelpCircleIcon, MapPinIcon, ArrowRightIcon, ThumbsUpIcon, StarIcon } from "lucide-react";
+import { BugIcon, CheckCircleIcon, HelpCircleIcon, MapPinIcon, ArrowRightIcon, ThumbsUpIcon, StarIcon, MoonIcon, SunIcon, MenuIcon } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Progress } from "@/components/ui/progress";
 import { Slider } from "@/components/ui/slider";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
+import { useTheme } from 'next-themes';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 
 const SimplifiedMDTInfo = () => {
   const [comfortLevel, setComfortLevel] = useState(50);
+  const { theme, setTheme } = useTheme();
 
   const testimonials = [
     { name: "John, 72", text: "I was skeptical at first, but maggot therapy healed my foot ulcer when nothing else worked." },
@@ -18,8 +24,29 @@ const SimplifiedMDTInfo = () => {
     { name: "Robert, 75", text: "I avoided amputation thanks to this treatment. It's truly remarkable." }
   ];
 
+  const faqItems = [
+    { question: "Is maggot therapy painful?", answer: "Most patients report little to no pain during the treatment. In fact, many experience pain relief as the maggots clean the wound." },
+    { question: "How long does the treatment take?", answer: "A typical treatment cycle lasts 2-3 days, but the number of cycles needed varies depending on the wound." },
+    { question: "Are the maggots visible during treatment?", answer: "The maggots are contained within a special dressing, so you won't see them directly on your wound." },
+    { question: "Can I go home during the treatment?", answer: "In many cases, yes. Your doctor will provide instructions for home care if appropriate for your situation." }
+  ];
+
   return (
-    <div className="container mx-auto px-4 py-8 max-w-6xl">
+    <div className={`min-h-screen ${theme === 'dark' ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'}`}>
+      <nav className="bg-primary text-primary-foreground p-4">
+        <div className="container mx-auto flex justify-between items-center">
+          <h1 className="text-2xl font-bold">Maggot Therapy Info</h1>
+          <div className="flex items-center space-x-4">
+            <Button variant="ghost" size="icon" onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>
+              {theme === 'dark' ? <SunIcon className="h-5 w-5" /> : <MoonIcon className="h-5 w-5" />}
+            </Button>
+            <Button variant="ghost" size="icon">
+              <MenuIcon className="h-5 w-5" />
+            </Button>
+          </div>
+        </div>
+      </nav>
+      <div className="container mx-auto px-4 py-8 max-w-6xl">
       <h1 className="text-6xl font-bold mb-12 text-center text-primary">Nature's Healing Helpers: Maggot Therapy</h1>
       
       <Card className="mb-12 bg-blue-50 shadow-lg">
@@ -226,25 +253,71 @@ const SimplifiedMDTInfo = () => {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <Tabs defaultValue="testimonial1" className="w-full">
-            <TabsList className="grid w-full grid-cols-3">
-              {testimonials.map((_, index) => (
-                <TabsTrigger key={index} value={`testimonial${index + 1}`}>Testimonial {index + 1}</TabsTrigger>
+          <Carousel className="w-full max-w-xs mx-auto">
+            <CarouselContent>
+              {testimonials.map((testimonial, index) => (
+                <CarouselItem key={index}>
+                  <Card>
+                    <CardHeader>
+                      <CardTitle>{testimonial.name}</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-xl">{testimonial.text}</p>
+                    </CardContent>
+                  </Card>
+                </CarouselItem>
               ))}
-            </TabsList>
-            {testimonials.map((testimonial, index) => (
-              <TabsContent key={index} value={`testimonial${index + 1}`}>
-                <Card>
-                  <CardHeader>
-                    <CardTitle>{testimonial.name}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-xl">{testimonial.text}</p>
-                  </CardContent>
-                </Card>
-              </TabsContent>
+            </CarouselContent>
+            <CarouselPrevious />
+            <CarouselNext />
+          </Carousel>
+        </CardContent>
+      </Card>
+
+      <Card className="mb-12 bg-purple-50 shadow-lg">
+        <CardHeader>
+          <CardTitle className="text-4xl font-semibold flex items-center">
+            <HelpCircleIcon className="mr-2 h-8 w-8" />
+            Frequently Asked Questions
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <Accordion type="single" collapsible className="w-full">
+            {faqItems.map((item, index) => (
+              <AccordionItem key={index} value={`item-${index}`}>
+                <AccordionTrigger className="text-2xl">{item.question}</AccordionTrigger>
+                <AccordionContent className="text-xl">
+                  {item.answer}
+                </AccordionContent>
+              </AccordionItem>
             ))}
-          </Tabs>
+          </Accordion>
+        </CardContent>
+      </Card>
+
+      <Card className="mb-12 bg-green-50 shadow-lg">
+        <CardHeader>
+          <CardTitle className="text-4xl font-semibold flex items-center">
+            <ArrowRightIcon className="mr-2 h-8 w-8" />
+            Contact Us for More Information
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <form className="space-y-4">
+            <div>
+              <Label htmlFor="name" className="text-xl">Name</Label>
+              <Input id="name" className="text-xl" placeholder="Your Name" />
+            </div>
+            <div>
+              <Label htmlFor="email" className="text-xl">Email</Label>
+              <Input id="email" className="text-xl" type="email" placeholder="your.email@example.com" />
+            </div>
+            <div>
+              <Label htmlFor="message" className="text-xl">Message</Label>
+              <Textarea id="message" className="text-xl" placeholder="Your questions or concerns..." />
+            </div>
+            <Button className="text-xl py-6 px-8">Send Message</Button>
+          </form>
         </CardContent>
       </Card>
 
@@ -287,6 +360,7 @@ const SimplifiedMDTInfo = () => {
           </div>
         </CardContent>
       </Card>
+      </div>
     </div>
   );
 };
