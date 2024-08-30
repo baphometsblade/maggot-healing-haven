@@ -1,5 +1,6 @@
 import React from 'react';
-import { Image } from '../../components/ui/image';
+import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { cn } from "@/lib/utils";
 
 const SimplifiedMDTInfo = () => {
   return (
@@ -17,11 +18,13 @@ const SimplifiedMDTInfo = () => {
             </p>
           </div>
           <div className="md:w-1/2">
-            <Image 
-              src="/placeholder.svg" 
-              alt="Illustration of maggot therapy process"
-              className="rounded-lg shadow-md mx-auto object-cover"
-            />
+            <AspectRatio ratio={16 / 9} className="bg-muted">
+              <img
+                src="/placeholder.svg"
+                alt="Illustration of maggot therapy process"
+                className={cn("rounded-lg shadow-md mx-auto object-cover", "h-full w-full")}
+              />
+            </AspectRatio>
           </div>
         </div>
       </section>
