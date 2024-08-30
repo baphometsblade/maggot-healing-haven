@@ -1,17 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { cn } from "@/lib/utils";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
-import { BugIcon, CheckCircleIcon, HelpCircleIcon, MapPinIcon, ArrowRightIcon } from "lucide-react";
+import { BugIcon, CheckCircleIcon, HelpCircleIcon, MapPinIcon, ArrowRightIcon, ThumbsUpIcon, StarIcon } from "lucide-react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Progress } from "@/components/ui/progress";
+import { Slider } from "@/components/ui/slider";
 
 const SimplifiedMDTInfo = () => {
+  const [comfortLevel, setComfortLevel] = useState(50);
+
+  const testimonials = [
+    { name: "John, 72", text: "I was skeptical at first, but maggot therapy healed my foot ulcer when nothing else worked." },
+    { name: "Mary, 68", text: "The treatment was much more comfortable than I expected. My wound is healing beautifully now." },
+    { name: "Robert, 75", text: "I avoided amputation thanks to this treatment. It's truly remarkable." }
+  ];
+
   return (
-    <div className="container mx-auto px-4 py-8 max-w-5xl">
-      <h1 className="text-5xl font-bold mb-12 text-center text-primary">Nature's Healing Helpers: Maggot Therapy</h1>
+    <div className="container mx-auto px-4 py-8 max-w-6xl">
+      <h1 className="text-6xl font-bold mb-12 text-center text-primary">Nature's Healing Helpers: Maggot Therapy</h1>
       
-      <Card className="mb-12 bg-blue-50">
+      <Card className="mb-12 bg-blue-50 shadow-lg">
         <CardHeader>
           <CardTitle className="text-4xl font-semibold flex items-center">
             <BugIcon className="mr-2 h-8 w-8" />
@@ -27,6 +38,9 @@ const SimplifiedMDTInfo = () => {
                 Doctors use very clean, special maggots (baby flies) to help wounds that aren't 
                 getting better on their own.
               </p>
+              <Button className="mt-4 text-xl" onClick={() => document.getElementById('how-it-works').scrollIntoView({ behavior: 'smooth' })}>
+                Learn How It Works
+              </Button>
             </div>
             <div className="md:w-1/2">
               <AspectRatio ratio={16 / 9} className="bg-muted">
@@ -41,7 +55,7 @@ const SimplifiedMDTInfo = () => {
         </CardContent>
       </Card>
 
-      <Card className="mb-12 bg-green-50">
+      <Card id="how-it-works" className="mb-12 bg-green-50 shadow-lg">
         <CardHeader>
           <CardTitle className="text-4xl font-semibold flex items-center">
             <CheckCircleIcon className="mr-2 h-8 w-8" />
@@ -91,7 +105,7 @@ const SimplifiedMDTInfo = () => {
         </CardContent>
       </Card>
 
-      <Card className="mb-12 bg-yellow-50">
+      <Card className="mb-12 bg-yellow-50 shadow-lg">
         <CardHeader>
           <CardTitle className="text-4xl font-semibold flex items-center">
             <HelpCircleIcon className="mr-2 h-8 w-8" />
@@ -113,6 +127,16 @@ const SimplifiedMDTInfo = () => {
               <p className="text-2xl leading-relaxed mt-4">
                 Many patients report feeling better and having less pain after treatment starts.
               </p>
+              <div className="mt-6">
+                <p className="text-xl mb-2">How comfortable do you think this treatment would be?</p>
+                <Slider
+                  defaultValue={[50]}
+                  max={100}
+                  step={1}
+                  onValueChange={(value) => setComfortLevel(value[0])}
+                />
+                <p className="text-lg mt-2">Your comfort level: {comfortLevel}%</p>
+              </div>
             </div>
             <div className="md:w-1/2">
               <AspectRatio ratio={16 / 9} className="bg-muted">
@@ -127,10 +151,10 @@ const SimplifiedMDTInfo = () => {
         </CardContent>
       </Card>
 
-      <Card className="mb-12 bg-purple-50">
+      <Card className="mb-12 bg-purple-50 shadow-lg">
         <CardHeader>
           <CardTitle className="text-4xl font-semibold flex items-center">
-            <CheckCircleIcon className="mr-2 h-8 w-8" />
+            <ThumbsUpIcon className="mr-2 h-8 w-8" />
             Why Consider This Treatment?
           </CardTitle>
         </CardHeader>
@@ -158,7 +182,7 @@ const SimplifiedMDTInfo = () => {
         </CardContent>
       </Card>
 
-      <Card className="mb-12 bg-red-50">
+      <Card className="mb-12 bg-red-50 shadow-lg">
         <CardHeader>
           <CardTitle className="text-4xl font-semibold flex items-center">
             <MapPinIcon className="mr-2 h-8 w-8" />
@@ -194,7 +218,37 @@ const SimplifiedMDTInfo = () => {
         </CardContent>
       </Card>
 
-      <Card className="bg-blue-50">
+      <Card className="mb-12 bg-orange-50 shadow-lg">
+        <CardHeader>
+          <CardTitle className="text-4xl font-semibold flex items-center">
+            <StarIcon className="mr-2 h-8 w-8" />
+            What Others Are Saying
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <Tabs defaultValue="testimonial1" className="w-full">
+            <TabsList className="grid w-full grid-cols-3">
+              {testimonials.map((_, index) => (
+                <TabsTrigger key={index} value={`testimonial${index + 1}`}>Testimonial {index + 1}</TabsTrigger>
+              ))}
+            </TabsList>
+            {testimonials.map((testimonial, index) => (
+              <TabsContent key={index} value={`testimonial${index + 1}`}>
+                <Card>
+                  <CardHeader>
+                    <CardTitle>{testimonial.name}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-xl">{testimonial.text}</p>
+                  </CardContent>
+                </Card>
+              </TabsContent>
+            ))}
+          </Tabs>
+        </CardContent>
+      </Card>
+
+      <Card className="bg-blue-50 shadow-lg">
         <CardHeader>
           <CardTitle className="text-4xl font-semibold flex items-center">
             <ArrowRightIcon className="mr-2 h-8 w-8" />
