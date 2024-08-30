@@ -74,18 +74,21 @@ const SimplifiedMDTInfo = () => {
         <div className="flex flex-col md:flex-row items-center">
           <div className="md:w-1/2 pr-4">
             <p className="text-2xl leading-relaxed mb-4">
-              You can get this treatment at the Royal Brisbane and Women's Hospital. Here's how:
+              In Australia, maggot therapy is typically available at:
             </p>
             <ul className="text-2xl leading-relaxed list-disc list-inside space-y-4">
-              <li>Ask your regular doctor for a referral.</li>
-              <li>The hospital is open Monday to Friday, 8 AM to 3 PM.</li>
-              <li>Call (07) 3497 3588 to make an appointment.</li>
+              <li>Major hospitals</li>
+              <li>Wound care centers</li>
+              <li>Clinics specializing in chronic wound treatment</li>
             </ul>
+            <p className="text-2xl leading-relaxed mt-4">
+              Ask your healthcare provider for a referral to a wound care specialist who can arrange this treatment.
+            </p>
           </div>
           <div className="md:w-1/2">
             <Image 
               src="/placeholder.svg" 
-              alt="Exterior view of Royal Brisbane and Women's Hospital"
+              alt="Illustration of a hospital or wound care clinic"
               className="rounded-lg shadow-md mx-auto object-cover"
             />
           </div>
